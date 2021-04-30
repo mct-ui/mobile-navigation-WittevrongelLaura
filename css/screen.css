@@ -442,6 +442,97 @@ a:focus {
 \*------------------------------------*/
 
 /*
+    Component: mobile nav
+    ---
+    Dedicated mobile nav component
+*/
+
+.c-mobile-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    /*state 1*/
+    /*opacity: 0;*/
+    /*animeren tussen de 2 states.*/
+    /*transition: opacity .25s;*/
+    pointer-events: none;
+}
+
+.has-mobile-nav .c-mobile-nav {
+    /*state 2*/
+    opacity: 1;
+    /*Pointer events is een property die specifieert of een element al dan niet een target mag zijn van mouse of touch events*/
+    /*pointer-events: auto zorgt er voor dat alle items weer klikbaar worden als de navigatie getoond wordt.*/
+    pointer-events: auto;
+}
+
+.c-mobile-nav__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.c-mobile-nav__bg {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #202024;
+    transition: opacity .25s ease;
+}
+
+.has-mobile-nav .c-mobile-nav__bg {
+    opacity: .5;
+}
+
+.c-page{
+    transition: transform .25s ease;
+    transform: translateX(0)
+}
+
+.has-mobile-nav .c-page{
+    transform: translateX(25%)
+}
+
+.c-mobile-nav__body {
+    position: relative;
+    padding: 24px;
+    height: 100vh;
+    width: 100vw;
+    background-color: #fff;
+    /*verschuift van links buiten de viewport (translateX(-100%)) naar rechts in de viewport (translateX(0)). 
+    Dus in plaats van opacity: 0 naar 1 te animeren animeren we de transform property van translateX(-100%) naar translate(0). 
+    Stel de transition property in op: transition: transform .25s ease.*/
+    transition: transform .25s ease;
+    transform: translateX(-100%);
+}
+
+
+.has-mobile-nav .c-mobile-nav__body {
+    transform: translateX(0);
+    
+}
+
+@media (min-width: 768px) {
+    .c-mobile-nav__body {
+        padding: 48px;
+    }
+}
+
+@media (min-width: 992px) {
+    /* Hide the mobile nav on larger viewports even whent it's open on smaller screens */
+    .c-mobile-nav {
+        display: none !important;
+    }
+}
+
+
+/*
     Component: Logo
     ---
     Website main logo
